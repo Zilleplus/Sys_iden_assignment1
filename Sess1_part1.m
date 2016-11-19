@@ -11,7 +11,7 @@ stdev_nu = 1;
 R0 = 1000;
 
 %%
- % format of set!,set2,set3
+ % format of set1,set2,set3
  % dim1= #measurements
  % dim2= #experiments
  % dim3= [i u]

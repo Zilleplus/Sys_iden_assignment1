@@ -4,23 +4,24 @@ function [ set, correlation_ni, correlation_i0 ] = Sess1_part1_generate_data( N,
     % dim3= [i u]
     set = ones(N,amount_of_experiments,2);
     for index_experiment = 1:amount_of_experiments
+        
         % Generating the current i0
         e1=randn(N,1);
         [bgen,agen] = butter(1,fgen);
         i0 = filter(bgen,agen,e1);
-        i0 = i0*stdev_i0/std(i0); % is it ok ?
+        i0 = i0*stdev_i0/std(i0); % rescaling the generated signal
 
         % Generating the voltage u0
         u0 = R0*i0;
 
         % Generating the noise nu
         mean_nu = 0;
-        nu = mean_nu + stdev_nu*randn(N,1); % zero mean Gaussian white noise
+        nu = mean_nu + stdev_nu*randn(N,1); % zero mean white Gaussian noise
 
         % Generating the noise ni
         e2 = randn(N,1);
         [bnoise,anoise] = butter(2,fnoise);
-        ni = filter(bnoise,anoise,e2);
+        ni = filter(bnoise,anoise,e2); % white Gaussian noise
         ni = ni*stdev_ni/std(ni);
 
         % Model

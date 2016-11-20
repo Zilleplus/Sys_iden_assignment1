@@ -53,6 +53,7 @@ plot(x_values,y1, ...
     x_values,y4, 'LineWidth',2)
 set(gca, 'fontsize', 17);
 legend('IV(1)','IV(2)','IV(3)','LS(1)');
+title('(a)')
 ylim([0,0.1]); ylabel('PDF(R)');
 
 % Autocorrelation function of i0 and ni
@@ -62,16 +63,19 @@ plot(0:10, correlation_i0_set1(12:end-1),'r-o'); hold all;
 set(gca, 'fontsize', 17);
 xlabel('Lag'); ylabel('Auto-correlation')
 legend('R_{ni,ni}','R_{i0,i0}');
+title('(b.1)')
 subplot(3,3,5);
 plot(0:10, correlation_ni_set2(12:end-1),'b-x'); hold all;
 plot(0:10, correlation_i0_set2(12:end-1),'r-o'); hold all;
 set(gca, 'fontsize', 17);
 xlabel('Lag'); ylabel('Auto-correlation')
+title('(b.2)')
 subplot(3,3,6);
 plot(0:10, correlation_ni_set3(12:end-1),'b-x'); hold all;
 plot(0:10, correlation_i0_set3(12:end-1),'r-o'); hold all;
 set(gca, 'fontsize', 17);
 xlabel('Lag'); ylabel('Auto-correlation')
+title('(b.3)')
 
 % Frequency response functions (FRF)
 num = 20; % number of points at which we calculate the frequency response
@@ -90,7 +94,7 @@ for k=1:3
     xlim([0,0.5]); xlabel('f/fs'); % fs = sampling frequency
     ylim([-30,10]); ylabel('Filter [dB]');
     legend('n_i filter', 'i_0 filter')
-    hold off;
+    title(sprintf('(c.%i)',k)); hold off;
 end
 
 %% Figures for exp2
@@ -113,6 +117,7 @@ plot(x_values,y1, ...
 set(gca, 'fontsize', 17);
 legend('IV (s = 1)','IV (s = 2)','IV (s = 5)','LS');
 ylim([0,0.05]); ylabel('PDF(R)');
+title('(a)')
 
 % Autocorrelation function of i0 and ni
 subplot(2,2,3);
@@ -121,6 +126,8 @@ plot(0:10, correlation_i0_set3(12:end-1),'r-o'); hold all;
 set(gca, 'fontsize', 17);
 xlabel('Lag'); ylabel('Auto-correlation')
 legend('R_{ni,ni}','R_{i0,i0}');
+title('(b)')
+
 
 
 % Frequency response functions (FRF)
@@ -139,6 +146,8 @@ set(gca, 'fontsize', 17);
 xlim([0,0.5]); xlabel('f/fs'); % fs = sampling frequency
 ylim([-30,10]); ylabel('Filter [dB]');
 legend('n_i filter', 'i_0 filter')
+title('(c)')
+
 
 
 toc

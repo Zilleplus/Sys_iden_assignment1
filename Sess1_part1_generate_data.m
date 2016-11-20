@@ -1,7 +1,7 @@
 function [ set, correlation_ni, correlation_i0 ] = Sess1_part1_generate_data( N,amount_of_experiments,fgen,R0,stdev_nu,stdev_ni,stdev_i0,fnoise )
     % dim1= #measurements
     % dim2= #experiments
-    % dim3= [i u]
+    % dim3= [i u] ! vector !
     set = ones(N,amount_of_experiments,2);
     for index_experiment = 1:amount_of_experiments
         

@@ -1,4 +1,4 @@
-function [ set ] = Sess1_part1_generate_data( N,amount_of_experiments,R0,stdev_nu,stdev_ni,stdev_i0 )
+function [ set ] = Sess1_part2_generate_data( N,amount_of_experiments,R0,stdev_nu,stdev_ni,stdev_i0 )
     % dim1= #measurements
     % dim2= #experiments
     % dim3= [i u] ! vector !

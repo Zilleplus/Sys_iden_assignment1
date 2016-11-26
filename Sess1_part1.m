@@ -35,7 +35,11 @@ s=1;
 [ ~ , IV_s5] = Sess1_part1_calc_estimators( set3, 5 ); % s = 5
 
 %% Figures for exp1
-figure(1);clf;
+fig=figure(1);clf;
+pause(0.00001);
+frame_h = get(handle(gcf),'JavaFrame');
+set(frame_h,'Maximized',1); 
+
 subplot(3,1,1);
 pd1 = fitdist(IV_set1,'Normal')
 pd2 = fitdist(IV_set2,'Normal')
@@ -97,8 +101,15 @@ for k=1:3
     title(sprintf('(c.%i)',k)); hold off;
 end
 
+name = './figures/Sess1_part1_exp1';
+saveas(fig,name,'eps');
+
 %% Figures for exp2
-figure(2);clf;
+fig=figure(2);clf;
+pause(0.00001);
+frame_h = get(handle(gcf),'JavaFrame');
+set(frame_h,'Maximized',1); 
+
 subplot(2,1,1);
 pd1 = fitdist(IV_set3,'Normal');
 pd2 = fitdist(IV_s2,'Normal');
@@ -148,6 +159,7 @@ ylim([-30,10]); ylabel('Filter [dB]');
 legend('n_i filter', 'i_0 filter')
 title('(c)')
 
-
+name = './figures/Sess1_part1_exp2';
+saveas(fig,name,'eps');
 
 toc

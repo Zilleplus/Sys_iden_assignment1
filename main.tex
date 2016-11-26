@@ -1,0 +1,74 @@
+%ne rien compléter dans le main! ;)
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+
+%%%%%%%%%%%%%%%%
+%%% PACKAGES %%%
+%%%%%%%%%%%%%%%%
+
+\usepackage{ucs}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[utf8]{inputenc} 
+%\usepackage[french]{babel}
+\usepackage[framemethod=tikz]{mdframed}
+
+%packages spéciaux
+\usepackage{fullpage}
+\usepackage{mathrsfs}
+\usepackage{numprint}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{float}
+
+\usepackage[numbered,framed,autolinebreaks]{misc/mcode}
+\usepackage{sfmath}
+\usepackage{sansmathaccent}
+\usepackage{cmbright}
+
+\usepackage{misc/slashbox}
+\usepackage{placeins} % permet d'utiliser \FloatBarrier et donc d'imposer le placement des images dans une section donnée.
+\usepackage{multirow}
+
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+
+
+%%%%%%%%%%%%%
+%%% INFOS %%%
+%%%%%%%%%%%%%
+
+\title{System Identification and Modeling - Part I}
+\author{Willem Melis (r0348639) and Marie Valenduc (r0656511)}
+\date{\today}
+
+%%%%%%%%%%%%%%%%
+%%% DOCUMENT %%%
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\input{misc/title.tex}
+
+%\tableofcontents 
+\input{part1_intro.tex}
+\input{part1_exp1.tex}
+\input{part1_exp2.tex}
+
+\appendix
+% \section*{Codes}
+% \addcontentsline{toc}{section}{Codes}
+% \input{appendix/code.tex}
+
+\end{document}
+
+
+
+

@@ -1,0 +1,18 @@
+\part{Noise on Input and Output.}
+In order to calculate the asymptotic value of the estimates, we will use the following statistical tools:
+\begin{itemize}
+    \item $\lim\limits_{N \rightarrow +\infty} \frac{1}{N} \sum_{k=0}^N x(k) = \mu_x $
+    \item $\lim\limits_{N \rightarrow +\infty} \frac{1}{N} \sum_{k=0}^N (x(k) - \mu_x)^2 = \sigma_x^2 $
+    \item For the mutually uncorrelated signals $x(k)$ and $y(k)$ holds $\lim\limits_{N \rightarrow +\infty} \frac{1}{N} \sum_{k=0}^N x(k) y(k) = 0 $
+\end{itemize}
+
+Using the facts that $\mu_{n_i}$ = $\mu_{n_u}$ $\mu_{i_0}$ = 0 and $i_0$, $n_i$ and $n_u$ are independent, we obtain: 
+
+\begin{equation}\label{as_val_LS}
+    \lim\limits_{N \rightarrow +\infty} \hat{R}_{LS} = R_0 \frac{1}{1+\frac{\sigma_{n_i}^2}{\sigma_{i_0}^2}}
+\end{equation}
+
+\begin{equation}\label{as_val_IV}
+        \lim\limits_{N \rightarrow +\infty} \hat{R}_{IV} = R_0 \frac{1}{1+\frac{R_{n_i n_i}(s)}{R_{i_0 i_0}(s)}}
+\end{equation}
+where $R_{x x}(l) = \lim\limits_{N \rightarrow +\infty} \frac{1}{N} \sum_{k=1}^N x(k) x(k-l)$ is the autocorrelation function of $x$.

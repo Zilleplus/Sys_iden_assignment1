@@ -128,6 +128,10 @@ xlabel('Lag'); ylabel('Auto-correlation')
 legend('R_{ni,ni}','R_{i0,i0}');
 title('(b)')
 
+s_vec = [1,2,5]
+correlation_ni_set3(12+s_vec)
+correlation_i0_set3(12+s_vec)
+correlation_ni_set3(12+s_vec)./correlation_i0_set3(12+s_vec)
 
 
 % Frequency response functions (FRF)

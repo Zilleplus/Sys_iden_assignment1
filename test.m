@@ -1,6 +1,18 @@
 close all;
-ni = [0.004742, -0.001132, -000104];
-i0 = [0.008701 0.006488 0.002797];
-for k = 1:3
-    rep(k) =  1/(1+(ni(k)/i0(k)))
-end
+% Test for s = 1
+s = 2;
+stdev_i0 = 0.1;
+stdev_ni = 0.1;
+stdev_nu = 1;
+stdev_u0 = stdev_i0*R0;
+Rnini = correlation_ni_set3(12+s);
+Ri0i0 = correlation_i0_set3(12+s);
+
+pd2
+stdev_RI = sqrt(stdev_i0^2*(stdev_nu^2 + stdev_ni^2*R0^2)/Ri0i0^2/N)
+
+
+stdev_RI = stdev_i0^2*(stdev_nu^2 + stdev_ni^2*R0^2)/Ri0i0^2/N + ...
+    (2*(stdev_u0^2*stdev_ni^2)^2+stdev_nu^2*stdev_i0^2*stdev_u0^2*stdev_ni^2+...
+    stdev_ni^4*stdev_nu^2*stdev_i0^2)/Ri0i0^4/N;
+sqrt(stdev_RI)

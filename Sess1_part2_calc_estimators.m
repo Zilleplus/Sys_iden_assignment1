@@ -1,4 +1,4 @@
-function [ LS , EIV ] = Sess1_part2_calc_estimators( set,stdev_ni,stdev_nu )
+function [ LS , EIV, IV ] = Sess1_part2_calc_estimators( set,stdev_ni,stdev_nu )
 % dim1= #measurements
 % dim2= #experiments
 % dim3= [i u] ! vector !
@@ -21,11 +21,27 @@ for index_experiment = 1:amount_of_experiments
     num = 0; denom = 0;
     
     num = sum((u.^2))/(stdev_nu^2) - sum((i.^2))/(stdev_ni^2);
-    num = num + sqrt( num^2 + 4* sum((u'*i).^2)/(stdev_ni^2 * stdev_nu^2)); 
+    num = num + sqrt( num^2 + 4* sum((u'*i).^2)/(stdev_ni^2 * stdev_nu^2));
     demum = 2*sum(u'*i)/stdev_nu;
-
+    
     % divide previous terms
     EIV(index_experiment) = num/demum;
+    
+    %% IV Estimator
+    s = 1;
+    
+    num = 0; denom = 0;
+    % add all terms
+    size_num_denom = size(u);
+    amount_of_terms=size_num_denom(1);
+    
+    for j = 1:amount_of_terms-s
+        num = num + u(j)*i(j+s);
+        denom = denom + i(j)*i(j+s);
+    end
+    
+    % divide previous terms
+    IV(index_experiment) = num./denom;
 end
 
 end

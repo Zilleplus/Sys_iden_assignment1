@@ -33,7 +33,7 @@ for k =1:2:3
         % output of the FIR system
         y_hat = filter(g,1,u0);
 
-        % computing the cost functions V_LS
+        % computing the least squares cost functions V_LS
         % based on the estimation set
         V_LS_est(order) = sum((y(index_est) - y_hat(1:N_est)).^2)/N_est; 
         % based on the validation set

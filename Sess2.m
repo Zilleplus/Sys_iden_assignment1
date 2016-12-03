@@ -1,58 +1,74 @@
+%--------------------------------------------------------------------------
+% Marie Valenduc and Willem Melis (November 2016) 
+% System identification and modeling - Session 2
+%--------------------------------------------------------------------------
 clear all; close all;
 
-for k =1:2
 % data
-N_est = 1000;
-N_val = 10000;
+N_est = 1000;                               % size of the estimation set
+N_val = 10000;                              % size of the validation set
+N = N_est + N_val; 
 index_est = 1:N_est;
-index_val = N_est+1:N_est+N_val;
+index_val = N_est+1:N;
+stdev_u0 = 1;
+stdev_ny = 0.5;
 
-N = N_est + N_val;
-sigma_u0 = 1;
-sigma_ny = 0.5;
-
-
-[b,a] = cheby1(3,0.5,[2*0.15 2*0.3]);
-
-u0=sigma_u0*randn(N,1);
-ny = sigma_ny*randn(N,1);
-y0=filter(b,a,u0);
-y=y0+ny;
-
-% Building matrix K
-for order = 0:100
-    t = toeplitz(u0(index_est));
-    K = tril(t);
-    K = K(:,1:order+1);
-    g = K\y(index_est);
+for k =1:2:3
+    % generation of the data
+    [b,a] = cheby1(3,0.5,[2*0.15 2*0.3]);   % transfer function G0
+    u0 = stdev_u0*randn(N,1);               % input
+    ny = stdev_ny*randn(N,1);               % noise on the ouput
+    y0 = filter(b,a,u0);                    % noiseless on the ouput
+    y = y0 + ny;                            % noisy ouput
     
-    y_hat = filter(g,1,u0([index_est,index_val]));
+    for order = 1:100
+        % building matrix K(u0)
+        t = toeplitz(u0(index_est));
+        K = tril(t);
+        K = K(:,1:order);
+        
+        % solving the system
+        g = K\y(index_est);
+        
+        % output of the FIR system
+        y_hat = filter(g,1,u0);
+
+        % computing the cost functions V_LS
+        % based on the estimation set
+        V_LS_est(order) = sum((y(index_est) - y_hat(1:N_est)).^2)/N_est; 
+        % based on the validation set
+        V_LS_val(order) = sum((y(index_val) - y_hat(N_est+1:N_est+N_val)).^2)/N_val;
+        
+        % computing the Akaike cost function V_AIC
+        V_AIC(order) = V_LS_val(order)*(1+2*(order)/N_val);
+        
+        % computing the error V_0
+        V_0(order) = sum((y0(index_val) - y_hat(index_val)).^2)/N_val;       
+    end
     
-    V_LS_est(order+1) = sum((y(index_est) - y_hat(1:N_est)).^2)/N_est;   
-    V_LS_val(order+1) = sum((y(index_val) - y_hat(N_est+1:N_est+N_val)).^2)/N_val;
-    V_AIC(order+1) = V_LS_val(order+1)*(1+2*(order+1)/N_val);
+    figure(1); subplot(2,2,k)
+    plot(V_LS_est./stdev_ny^2,'r','LineWidth',2); hold all;
+    plot(V_LS_val./stdev_ny^2,'g','LineWidth',2); hold all;
+    plot(V_AIC./stdev_ny^2,'LineWidth',2)
+    set(gca, 'fontsize', 17);
+    xlim([0,100]); ylim([0.7, 1.2]);
+    ylabel('Cost'); xlabel('Order');
+    legend('V_{est}','V_{val}','V_{AIC}');
+    if(k==1) title('Noisy data; \sigma_{ny} = 0.5'); 
+    elseif(k==3) title('Noisy data; \sigma_{ny} = 0.05'); 
+    end
     
-    V_0(order+1) = sum((y0(index_est) - y_hat(1:N_est)).^2)/N_est;   
-
+    figure(1); subplot(2,2,k+1)
+    plot(sqrt(V_0/stdev_ny^2),'LineWidth',2)
+    set(gca, 'fontsize', 17);
+    xlim([0,100]); ylim([0, 1]);
+    ylabel('Normalized RMS'); xlabel('Order');
+    legend('V_0');
+    if(k==1) title('Noiseless data; \sigma_{ny} = 0.5'); 
+    elseif(k==3) title('Noiseless data; \sigma_{ny} = 0.05'); 
+    end
     
-end 
-
-figure(1); subplot(2,2,k)
-plot(V_LS_est./sigma_ny^2,'r','LineWidth',2); hold all;
-plot(V_LS_val./sigma_ny^2,'g','LineWidth',2); hold all;
-plot(V_AIC./sigma_ny^2,'LineWidth',2)
-set(gca, 'fontsize', 17);
-xlim([0,100]); ylim([0.7, 1.2]);
-ylabel('Cost'); xlabel('Order');
-legend('V_{est}','V_{val}','V_{AIC}');
-
-figure(1); subplot(2,2,k+2)
-plot(sqrt(V_0/sigma_ny^2),'LineWidth',2)
-set(gca, 'fontsize', 17);
-xlim([0,100]); ylim([0, 1]);
-ylabel('Normalized RMS'); xlabel('Order');
-legend('V_0');
-
+    stdev_ny = 0.05;                        % for second experiment
 end
 
 

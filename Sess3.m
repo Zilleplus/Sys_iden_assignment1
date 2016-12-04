@@ -1,4 +1,6 @@
 close all;
+load oef1.mat;
+
 % impulse(syspoly)
 % 
 % u = iddata([],randn(1000,1),1);

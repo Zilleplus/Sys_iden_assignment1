@@ -39,8 +39,9 @@ for k =1:2:3
         % based on the validation set
         V_LS_val(order) = sum((y(index_val) - y_hat(N_est+1:N_est+N_val)).^2)/N_val;
         
-        % computing the Akaike cost function V_AIC
-        V_AIC(order) = V_LS_val(order)*(1+2*(order+1)/N_val);
+        % computing the Akaike cost function V_AIC (based on the estimation
+        % set !)
+        V_AIC(order) = V_LS_est(order)*(1+2*(order+1)/N_est);
         
         % computing the error V_0
         V_0(order) = sum((y0(index_val) - y_hat(index_val)).^2)/N_val;       

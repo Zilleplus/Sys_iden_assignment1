@@ -10,11 +10,20 @@ N_val = 10000;                              % size of the validation set
 N = N_est + N_val; 
 index_est = 1:N_est;
 index_val = N_est+1:N;
+% random_indices = randperm(N);
+% index_est = random_indices(1:N_est);
+% index_val = random_indices(N_est+1:N);
+
 stdev_u0 = 1;
 stdev_ny = 0.5;
 
 for k =1:2:3
     % generation of the data
+    
+    % [B,A] = cheby1(N,R,Wp) designs an Nth order lowpass digital Chebyshev
+    % filter with R decibels of peak-to-peak ripple in the passband. cheby1
+    % returns the filter coefficients in length N+1 vectors B (numerator) and
+    % A (denominator). The passband-edge frequency Wp.
     [b,a] = cheby1(3,0.5,[2*0.15 2*0.3]);   % transfer function G0
     u0 = stdev_u0*randn(N,1);               % input
     ny = stdev_ny*randn(N,1);               % noise on the ouput

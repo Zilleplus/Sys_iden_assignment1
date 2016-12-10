@@ -13,9 +13,10 @@ index_val = N_est+1:N;
 stdev_u0 = 1;
 stdev_ny = 0.5;
 
+[b,a] = cheby1(3,0.5,[2*0.15 2*0.3]);      % transfer function G0
+
 for k =1:2:3
     % generation of the data
-    [b,a] = cheby1(3,0.5,[2*0.15 2*0.3]);   % transfer function G0
     u0 = stdev_u0*randn(N,1);               % input
     ny = stdev_ny*randn(N,1);               % noise on the ouput
     y0 = filter(b,a,u0);                    % noiseless on the ouput
@@ -78,6 +79,9 @@ for k =1:2:3
     
     stdev_ny = 0.05;                        % for second experiment
 end
+
+figure(2); bode(tf(b,a));
+
 
 
 

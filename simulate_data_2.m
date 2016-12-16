@@ -26,7 +26,6 @@ u_white_noise = randn(len,1);
 disp('simulating step');
 len=500;
 u_step = ones(len,1);
-u_step(1:10) = 0;
 [y_step,~] = simulate(u_step,nsim);
 
 disp('simulating sinus');

@@ -1,8 +1,5 @@
-function [ y,DC ] = simulate( input,nsim )
-%SIMULATE Summary of this function goes here
-%   Detailed explanation goes here
-
-m = numel(input);
+function [ y, DC ] = simulate( input, nsim )
+m = numel(input); % length of the input signal
 y = zeros(m,1);
 DC = 0;
 for i = 1:nsim
@@ -10,6 +7,5 @@ for i = 1:nsim
     y = y + output./nsim;
     DC = DC + mean(output)/nsim;
 end
-
 end
 

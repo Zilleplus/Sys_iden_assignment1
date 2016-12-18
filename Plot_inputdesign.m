@@ -2,6 +2,11 @@ close all; clear all;
 load('simulation_data_2.mat');
 
 DC = mean(y_zero);
+% Sampling frequency = 10
+t_500 = 0:0.1:49.9;
+t_1000 = 0:0.1:99.9;
+t_2000 = 0:0.1:199.9;
+
 %% Applying a zero-sequence to the system - time domain
 figure(1); clf;
 subplot(211); plot(u_zero,'LineWidth',2); 
@@ -50,21 +55,31 @@ xlabel('Time'); title('Output y');
 
 %%  Applying a white noise - time domain
 figure(5); clf;
-subplot(211); plot(u_white_noise(1:200),'LineWidth',2); 
+subplot(211); plot(u_white_noise,'LineWidth',2); 
 set(gca, 'fontsize', 15); grid on;
 xlabel('Time'); title('Input u : white noise');
-subplot(212); plot(y_white_noise(1:200) - DC,'LineWidth',2);
+subplot(212); plot(y_white_noise - DC,'LineWidth',2);
 set(gca, 'fontsize', 15); grid on;
 xlabel('Time'); title('Output y');
 
 %%  Applying a PRBS - time domain
 figure(6); clf;
-subplot(211); plot(u_prbs(1:200),'LineWidth',2); 
+subplot(211); plot(u_prbs,'LineWidth',2); 
 set(gca, 'fontsize', 15); grid on;
 xlabel('Time'); title('Input u : PRBS');
-subplot(212); plot(y_prbs(1:200) - DC,'LineWidth',2);
+subplot(212); plot(y_prbs - DC,'LineWidth',2); 
 set(gca, 'fontsize', 15); grid on;
 xlabel('Time'); title('Output y');
+
+%%  Applying a sine wave - time domain
+figure(6); clf;
+subplot(211); plot(u_sin,'LineWidth',2); 
+set(gca, 'fontsize', 15); grid on;
+xlabel('Time'); title('Input u : sine wave');
+subplot(212); plot(y_sin - DC,'LineWidth',2);
+set(gca, 'fontsize', 15); grid on;
+xlabel('Time'); title('Output y');
+
 
 
 

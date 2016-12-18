@@ -1,22 +1,25 @@
-function preprocessed_data = preprocessing( data, level, delay, cutoff, sigma, option )
+function preprocessed_data = preprocessing( data, level, delay, sigma, show_plot )
 % PREPROCESSING This MATLAB function returns the signal y which is
 % preprocessed by means of the following steps:
-%           - Removing the peaks + DC offset ;
-%           - Removing the trend with a Butterworth filter ;
+%           - Removing DC offset ;
+%           - Removing the peaks ;
+%           - Removing the trend ;
 %           - Removing the delay ;
 % Input :   * data: iddata object ;
 %           * level: 2 elements vector, for the function pkshave ;
 %           * delay: scalar, delay introduced by the system ;
-%           * cutoff: scalar, cut-off frequency for the Butterworth
-%           filter ;
 %           * sigma: used for the plot ;
-%           * option: = 1, to display the steps of preprocessing ;
-%                     = 0, otherwise ;
+%           * show_plot: = 1, to display the steps of preprocessing ;
+%                        = 0, otherwise ;
+%                        = 2, other plot
 % Output :  * preprocessed_y: iddata object, treated data;
-y = data.y
+%
+% System identification and modelling
+% December 2016
+y = data.y ;
 % STEP 1 : Remove DC offset
-DC = mean(y);
-y_step1 = y - DC;
+DC = mean(y) ;
+y_step1 = y - DC ;
 
 % STEP 2 : Remove the peaks with 'pkshave'
 if ~isempty(level)
@@ -27,7 +30,9 @@ else
 end
 
 % STEP 3 : Remove the trend
-[bf,af] = butter(4, cutoff); % low pass Butterworth filter
+% TO DO: HOW CAN WE ESTIMATE THE 'TREND' OF THE OUTPUT? HOW TO CORRECT IT ?
+% this comes from the function 'pkshave'
+[bf,af] = butter(4, 0.05); % low pass Butterworth filter
 yTrend = filtfilt(bf, af, y_step2);
 y_step3 = y_step2 - yTrend;
 
@@ -35,7 +40,7 @@ y_step3 = y_step2 - yTrend;
 preprocessed_y = y_step3(delay:end);
 
 % Plot
-if option == 1
+if show_plot == 1
     figure(1); clf;
     subplot(2,2,1); plot(y_step1,'LineWidth',2);
     set(gca, 'fontsize', 15); grid on;
@@ -59,7 +64,7 @@ if option == 1
         'FontWeight','bold');
     legend('Raw y','Preprocessed y');
     ylim([-sigma,sigma]);
-elseif option == 2
+elseif show_plot == 2
     figure(1); clf; plot(y_step1,'LineWidth',2);
     set(gca, 'fontsize', 15); grid on;
     xlabel('Time'); title('Output y - without DC offset', 'FontWeight','bold');

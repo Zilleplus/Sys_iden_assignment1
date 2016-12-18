@@ -38,4 +38,7 @@ len = 2000;
 u_prbs= idinput(len,'prbs',[0,1],[-3,3]);
 [y_prbs,~] = simulate(u_prbs,nsim);
 
+disp('simulating sine wave at several frequencies')
+% TO DO - See gile bodeTest.m
+
 save('simulation_data_2.mat');

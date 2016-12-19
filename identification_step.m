@@ -14,9 +14,9 @@ preprocessed_prbs_val = preprocessing( iddata(y_prbs(N_est+1:N_est+N_val), ...
     u_prbs(N_est+1:N_est+N_val),1),[], delay, 20, 0); % validation data set
 
 %% ARX-model
-disp('testing ARX model ..');
-na = 8; % to be choosen
-nb = 4; % to be choosen
+disp('testing ARX model ...');
+na = 3; % to be choosen
+nb = 3; % to be choosen
 nk = 15; % estimated delay
 
 % Generate model-order combinations for estimation

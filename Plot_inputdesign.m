@@ -19,7 +19,7 @@ xlabel('Time'); title('Output y');
 %% Applying a zero-sequence to the system - frequency domain
 nfft = size(y_zero,1);
 Fs = 1;                         % sampling frenquency
-yfft = fft(y_zero);             % discrete Fourier transform
+yfft = fft(y_zero-DC);          % discrete Fourier transform
 yfft = yfft(1:nfft/2)/nfft;     % single-sided spectrum
 
 f = (0:nfft/2-1)*Fs/nfft;

@@ -47,3 +47,21 @@ for i = 1:numel(na)
     end
 end
 
+%% OE model
+% For a system represented by:
+% y(t)=[ B(q)/F(q) ]* u(t?nk)+e(t)
+% where y(t) is the output, u(t) is the input and e(t) is the error.
+% nb — Order of the B polynomial + 1. nb is an Ny-by-Nu matrix. 
+%     Ny is the number of outputs and Nu is the number of inputs.
+% nf — Order of the F polynomial. nf is an Ny-by-Nu matrix. 
+%     Ny is the number of outputs and Nu is the number of inputs.
+% nk — Input delay, expressed as the number of samples. 
+%     nk is an Ny-by-Nu matrix. 
+%     Ny is the number of outputs and Nu is the number of inputs.
+%     The delay appears as leading zeros of the B polynomial.
+
+nb=4;
+nf=5;
+show_plot=true;
+[model, order, fit, aic_value, mag ] = fun_OE_model(nb,nf, ...
+    preprocessed_prbs_est, preprocessed_prbs_val, show_plot )

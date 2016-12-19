@@ -5,9 +5,9 @@ clear all; close all;
 
 disp('starting simulations');
 nsim = 200;  % number of simulations
-Nest = 1000; % estimation set size
-Nval = 500;  % validation set size  
-N = Nest + Nval;
+N_est = 1000; % estimation set size
+N_val = 500;  % validation set size  
+N = N_est + N_val;
 
 disp('simulating zeros');
 len = 1000 ;
@@ -42,7 +42,9 @@ y_white_noise = simulate(u_white_noise,nsim);
 disp('simulating Pseudorandom binary sequence (PRBS)');
 len = N;
 u_prbs= idinput(len,'prbs',[0,1],[-3,3]);
-y_prbs = simulate(u_prbs,nsim);
+y_prbs_est = simulate(u_prbs(1:N_est),nsim);
+y_prbs_val = simulate(u_prbs(N_est+1:N),nsim);
+
 
 disp('simulating sine wave at several frequencies')
 % TO DO 

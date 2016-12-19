@@ -8,45 +8,26 @@ load('simulation_data_3.mat')
 N_est = 1000;
 N_val = 500;
 delay = 15;
-preprocessed_prbs_est = preprocessing( iddata(y_prbs(1:N_est), ...
+preprocessed_prbs_est = preprocessing( iddata(y_prbs_est,...
     u_prbs(1:N_est),1),[], delay, 20, 0); % estimation data set
-preprocessed_prbs_val = preprocessing( iddata(y_prbs(N_est+1:N_est+N_val), ...
-    u_prbs(N_est+1:N_est+N_val),1),[], delay, 20, 0); % validation data set
+preprocessed_prbs_val = preprocessing( iddata(y_prbs_val,...
+    u_prbs(N_est+1:N),1),[], delay, 20, 0); % validation data set
 
-%% ARX-model
-disp('testing ARX model ...');
-na = 3; % to be choosen
-nb = 3; % to be choosen
-nk = 15; % estimated delay
+%%
+na = 20; nb = 20;
+[model, order, fit, aic_value ]= fun_arx_model(na,nb, ...
+    preprocessed_prbs_est, preprocessed_prbs_val,true )
 
-% Generate model-order combinations for estimation
-search_region = struc([na-2:na+2],[nb-2:nb+2],[nk-1:nk+1]);
-
-% Estimate ARX models and compute the loss function for each model order 
-% combination
-V = arxstruc(preprocessed_prbs_est, preprocessed_prbs_val, ...
-    search_region);
-
-% Select the model order with the best fit to the validation data
-order = selstruc(V,0);
-
-% Estimate an ARX model of selected order.
-model = arx(preprocessed_prbs_est, order);
-
-% Compare model output and measured output
-[y_model,fit] = compare(preprocessed_prbs_val, model)
-
-plot(y_model.y); hold on;
-plot(preprocessed_prbs_val.y); 
-
-% figure(); clf;
-% [E,R] = resid([preprocessed_prbs_val.y u_prbs(N_est+1:N_est+N_val)], ...
-%     model);
-% 
-% % Pole-zero map of system model
-% figure(); clf;
-% pzplot(model); grid on;
-
-
+%% 
+na = 3:10:200;
+nb = 3:10:200;
+fit = zeros(numel(na),numel(nb));
+aic_value = zeros(numel(na),numel(nb));
+for i = 1:numel(na)
+    for j = 1:numel(nb)
+[~, ~, fit(i,j), aic_value(i,j) ]= fun_arx_model(na(i),nb(j), ...
+    preprocessed_prbs_est, preprocessed_prbs_val,false );
+    end
+end
 
 

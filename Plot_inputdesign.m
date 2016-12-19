@@ -17,9 +17,16 @@ set(gca, 'fontsize', 15); grid on;
 xlabel('Time'); title('Output y');
 
 %% Applying a zero-sequence to the system - frequency domain
-nfft = size(y_zero,1);
+delay = 15;
+preprocessed_data = preprocessing(iddata( y_zero, u_zero, 1 )...
+    ,[], delay, 10, 0 )
+y_zero_filtered = preprocessed_data.y;
+
+% [b, a] = butter(4, 0.01, 'high');
+% y_zero_filtered = filter(b,a,y_zero-DC);
+nfft = size(y_zero_filtered,1);
 Fs = 1;                         % sampling frenquency
-yfft = fft(y_zero-DC);          % discrete Fourier transform
+yfft = fft(y_zero_filtered);          % discrete Fourier transform
 yfft = yfft(1:nfft/2)/nfft;     % single-sided spectrum
 
 f = (0:nfft/2-1)*Fs/nfft;

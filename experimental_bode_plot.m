@@ -30,13 +30,17 @@ for k = 1:numel(freq)
     %plot(y_mut_sine(:,k)-DC); hold on;
     %plot(preprocessed_data.y,'r')
     z(:,k) = fft(preprocessed_data.y)/len_test;
-    plot(abs(z(:,k)));
     ampl(k) = max(abs(z(:,k)));
 end
 
 %%
 figure(1); clf;
-semilogy(freq,ampl,'.-'); grid on
+semilogy( 2*pi*freq/len_test, ampl,'.-' ); grid on;
+title('Experimental Bode plot');
+xlabel('normalized frequency f/f_s'); 
+xlim([2*pi*freq(1)/len_test, 2*pi*freq(end)/len_test]);
+
+
 
 
 

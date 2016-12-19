@@ -32,11 +32,12 @@ end
 % STEP 3 : Remove the trend
 % TO DO: HOW CAN WE ESTIMATE THE 'TREND' OF THE OUTPUT? HOW TO CORRECT IT ?
 % this comes from the function 'pkshave'
-% [bf,af] = butter(4, 0.05,'high'); % high pass Butterworth filter
-% y_step3 = filtfilt(bf, af, y_step2);
-[bf,af] = butter(4, 0.05); % low pass Butterworth filter
-yTrend = filtfilt(bf, af, y_step2);
-y_step3 = y_step2 - yTrend;
+% [bf,af] = butter(4, 0.05); % low pass Butterworth filter
+% yTrend = filtfilt(bf, af, y_step2);
+% y_step3 = y_step2 - yTrend;
+
+[b, a] = butter(4, 0.01, 'high');
+y_step3 = filter(b,a,y_step2);
 
 % STEP 4 : Remove the delay
 preprocessed_y = y_step3(delay:end);

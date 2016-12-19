@@ -1,5 +1,5 @@
 close all; clear all;
-load('simulation_data_2.mat');
+load('simulation_data_3.mat');
 
 DC = mean(y_zero);
 % Sampling frequency = 10
@@ -36,11 +36,10 @@ xlim([2*pi*f(1),2*pi*f(end)]);
 
 %%  Applying an impulse - time domain
 figure(3); clf;
-subplot(211); stem(0:24, u_impulse_response(1:25),'LineWidth',2); 
-set(gca, 'fontsize', 15); grid on;
+subplot(211); stem(0:24, u_impulse_response(1:25),'LineWidth',2); grid on;
 xlabel('Time'); title('Input u : impulse in k = 0');
 subplot(212); stem(0:24, y_impulse_response(1:25) - DC,'LineWidth',2); 
-set(gca, 'fontsize', 15); grid on;
+grid on;
 xlabel('Time'); title('Output y');
 
 %%  Applying a step - time domain

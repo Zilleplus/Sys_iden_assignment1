@@ -89,7 +89,8 @@ elseif show_plot == 2
     ylim([-sigma,sigma]);
 end    
 
-preprocessed_data = iddata(preprocessed_y, data.u, 1);
+input = data.u;
+preprocessed_data = iddata(preprocessed_y, input(delay:end), 1);
 
 
 %     figure(2); clf;

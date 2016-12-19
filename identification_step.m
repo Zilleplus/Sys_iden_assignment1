@@ -17,8 +17,8 @@ na = 11; nb = 12;
     preprocessed_prbs_est, preprocessed_prbs_val,true )
 
 %% ARX model
-na = 3:2:20; 
-nb = 3:2:20;
+na = 9:2:20; 
+nb = 9:2:20;
 fit = zeros(numel(na),numel(nb));
 aic_value = zeros(numel(na),numel(nb));
 
@@ -31,9 +31,9 @@ end
 
 
 %% ARMAX model
-na = 3:4:20;
-nb = 3:4:20;
-nc = 3:4:20;
+na = 9:2:20;
+nb = 9:2:20;
+nc = 4;
 fit = zeros(numel(na),numel(nb),numel(nc));
 aic_value = zeros(numel(na),numel(nb),numel(nc));
 

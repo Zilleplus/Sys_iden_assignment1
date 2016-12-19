@@ -6,7 +6,7 @@ clear all; close all;
 disp('starting simulations');
 nsim = 200;  % number of simulations
 N_est = 1000; % estimation set size
-N_val = 500;  % validation set size  
+N_val = 1000;  % validation set size  
 N = N_est + N_val;
 
 disp('simulating zeros');

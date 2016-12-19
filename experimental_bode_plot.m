@@ -34,11 +34,12 @@ for k = 1:numel(freq)
 end
 
 %%
-figure(1); clf;
-semilogy( 2*pi*freq/len_test, ampl,'.-' ); grid on;
+figure; clf;
+plot(linspace(0,pi,numel(mag)),log10(mag)*20); hold on;
+plot( 2*pi*freq/len_test, 20*log10(ampl),'.-' ); grid on;
 title('Experimental Bode plot');
 xlabel('normalized frequency f/f_s'); 
-xlim([2*pi*freq(1)/len_test, 2*pi*freq(end)/len_test]);
+%xlim([2*pi*freq(1)/len_test, 2*pi*freq(end)/len_test]);
 
 
 

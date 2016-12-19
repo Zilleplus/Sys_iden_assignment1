@@ -14,8 +14,9 @@ preprocessed_prbs_val = preprocessing( iddata(y_prbs_val,...
 %%
 na = 11; nb = 12;
 [model, order, fit, aic_value, mag ]= fun_arx_model(na,nb, ...
-    preprocessed_prbs_est, preprocessed_prbs_val,true )
-
+    preprocessed_prbs_est, preprocessed_prbs_val,false );
+[mag,phase,wout] = bode(model)
+mag = squeeze(mag);
 %% ARX model
 na = 9:2:20; 
 nb = 9:2:20;

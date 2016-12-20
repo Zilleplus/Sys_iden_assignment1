@@ -30,8 +30,6 @@ else
 end
 
 % STEP 3 : Remove the trend
-% TO DO: HOW CAN WE ESTIMATE THE 'TREND' OF THE OUTPUT? HOW TO CORRECT IT ?
-% this comes from the function 'pkshave'
 % [bf,af] = butter(4, 0.05); % low pass Butterworth filter
 % yTrend = filtfilt(bf, af, y_step2);
 % y_step3 = y_step2 - yTrend;
@@ -65,23 +63,23 @@ if show_plot == 1
     ylim([-sigma,sigma]);
 elseif show_plot == 2
     figure(1); clf; plot(y_step1,'LineWidth',2);
-    set(gca, 'fontsize', 15); grid on;
+    set(gca, 'fontsize', 11); grid on;
     xlabel('Time'); title('Output y - without DC offset', 'FontWeight','bold');
     ylim([-sigma,sigma]);
     
     figure(2); clf; plot(y_step2,'LineWidth',2);
-    set(gca, 'fontsize', 15); grid on;
+    set(gca, 'fontsize', 11); grid on;
     xlabel('Time'); title('Peak shaving', 'FontWeight','bold');
     ylim([-sigma,sigma]);
  
     figure(3); clf; plot(y_step3,'LineWidth',2);
-    set(gca, 'fontsize', 15); grid on;
+    set(gca, 'fontsize', 11); grid on;
     xlabel('Time'); title('Detrended y', 'FontWeight','bold');
     ylim([-sigma,sigma]);
     
     figure(4); clf; plot(y_step1(delay:end),'LineWidth',2); hold on;
     plot(preprocessed_y,'r','LineWidth',2);
-    set(gca, 'fontsize', 15); grid on;
+    set(gca, 'fontsize', 11); grid on;
     xlabel('Time'); title('Delay removed - Preprocessed output', ...
         'FontWeight','bold');
     legend('Raw y','Preprocessed y');

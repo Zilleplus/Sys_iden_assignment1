@@ -33,7 +33,7 @@ for k = 1:numel(freq)
 end
 
 figure; clf;
-%plot(wout,log10(mag)*20); hold on;
+plot(wout,log10(mag)*20); hold on;
 plot( 2*pi*freq/len_test, 20*log10(smooth(ampl)),'.-' ,'LineWidth',1.5 ...
     , 'MarkerSize',12); grid on;
 title('Experimental Bode estimate');

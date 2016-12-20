@@ -39,6 +39,7 @@ plot( 2*pi*freq/len_test, 20*log10(smooth(ampl)),'.-' ,'LineWidth',1.5 ...
 title('Experimental Bode estimate');
 xlabel('normalized frequency f/fs'); ylabel('Magnitude (dB)'); 
 xlim([2*pi*freq(1)/len_test, 2*pi*freq(end)/len_test]);
+legend('estimated model','real system')
 
 
 

@@ -13,6 +13,7 @@ preprocessed_prbs_val = preprocessing( iddata(y_prbs_val,...
 
 
 %% ARX model
+close all;
 disp('Testing ARX model ...');
 na = 3:3:24; nb = 3:3:24;
 
@@ -22,7 +23,7 @@ aic_value = zeros(numel(na),numel(nb));
 for i = 1:numel(na)
     for j = 1:numel(nb)
         [~, ~, fit(i,j), aic_value(i,j) ]= fun_arx_model( na(i),nb(j), ...
-            preprocessed_prbs_est, preprocessed_prbs_val,false );
+            preprocessed_prbs_est, preprocessed_prbs_val,true );
     end
 end
 
@@ -41,7 +42,7 @@ figure(1); clf; bar(M); title('Hankel Singular Values');
 xlabel('State'); ylabel('State Energy');
 
 % Reduced order
-rorder = 8;
+rorder = 10;
 Ab = Ab(1:rorder,1:rorder);
 Bb = Bb(1:rorder);
 Cb = Cb(1:rorder);
@@ -55,26 +56,24 @@ plot(preprocessed_prbs_val.y);
 
 figure(3);
 pzplot(rsys); hold on;
-pzplot(sys); 
+pzplot(sys); legend('reduced order system','original system');
 
 [mag,phase,wout] = bode(rsys); 
 mag = squeeze(mag);
-%%
-
-[mag,phase,wout] = bode(model)
-mag = squeeze(mag);
-
-
-
 
 
 %% ARMAX model
-na = 9:2:20;
-nb = 9:2:20;
-nc = 4;
+% For a system represented by:
+% y(t)=[ B(q)/A(q) ]* u(t) + [ C(q)/A(q) ]*e(t)
+% where y(t) is the output, u(t) is the input and e(t) is the disturbance.
+% na = order of A polynomial     (Ny-by-Ny matrix)
+% order of B polynomial + 1 (Ny-by-Nu matrix)
+
+disp('Testing ARMAX model ...');
+na = 7:2:15; nb = 13:2:20; nc = 10;
+
 fit = zeros(numel(na),numel(nb),numel(nc));
 aic_value = zeros(numel(na),numel(nb),numel(nc));
-
 for i = 1:numel(na)
     for j = 1:numel(nb)
         for k = 1:numel(nc)
@@ -83,6 +82,18 @@ for i = 1:numel(na)
         end
     end
 end
+disp('Here is your fit ...');
+
+fit
+
+rowLabels = {'7', '9' , '11', '13', '15'};
+columnLabels = {'13', '15' , '17'};
+
+matrix2latex(fit, './tables/fit__table.tex', ...
+            'rowLabels', rowLabels, ...
+            'columnLabels', columnLabels, ...
+            'alignment', 'c', ...
+            'format', '%-6.2f');
 
 %% OE model
 % For a system represented by:

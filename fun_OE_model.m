@@ -20,6 +20,7 @@ if show_plot
     figure(1); clf;
     plot(y_model.y); hold on;
     plot(preprocessed_prbs_val.y);
+    legend('model','validation data');
     
     % Compute and test the residuals
     figure(2); clf;

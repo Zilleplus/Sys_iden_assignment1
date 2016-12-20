@@ -18,8 +18,8 @@ show_plot=true;
     preprocessed_prbs_est, preprocessed_prbs_val, show_plot )
 %% Generate table with different fit values
 
-nb = 1:2:6;
-nf = 1:2:6;
+nb = 1:2:9;
+nf = 1:2:9;
 nk=0; % delay allready removed from the data
 
 show_plot=false;
@@ -39,14 +39,22 @@ for index_nb = 1:numel(nb)
     end
 end
 
-%%
-rowLabels = {'1', '3' , '5'};
-columnLabels = {'1', '3' , '5'};
+rowLabels = {'nb=1', 'nb=3' , 'nb=5' , 'nb=7' , 'nb=9'};
+columnLabels = {'nf=1', 'nf=3' , 'nf=5', 'nf=7' , 'nf=9'};
 
 matrix2latex(fit, './tables/fit_OE_table.tex', ...
             'rowLabels', rowLabels, ...
             'columnLabels', columnLabels, ...
             'alignment', 'c', ...
             'format', '%-6.2f');
-        
-        
+matrix2latex(aic_value, './tables/AIC_OE_table.tex', ...
+            'rowLabels', rowLabels, ...
+            'columnLabels', columnLabels, ...
+            'alignment', 'c', ...
+            'format', '%-6.2f');
+%% OPTIMAL FIT VALUE
+nb=3;
+nf=7;
+show_plot=true;
+[model, order, fit, aic_value, mag ] = fun_OE_model(nb,nf, ...
+    preprocessed_prbs_est, preprocessed_prbs_val, show_plot )

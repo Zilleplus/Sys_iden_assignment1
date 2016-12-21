@@ -79,8 +79,8 @@ figure(3);
 pzplot(rsys); hold on;
 pzplot(sys); legend('reduced order system','original system');
 
-[mag,phase,wout] = bode(rsys); 
-mag = squeeze(mag);
+[mag1,phase,wout1] = bode(rsys); 
+mag1 = squeeze(mag1);
 
 
 %% ARMAX model
@@ -108,7 +108,7 @@ columnLabels = {'$n_a = 8$','$n_a = 9$','$n_a = 10$', '$n_a = 11$', ...
     '$n_a = 12$','$n_a = 13$','$n_a = 14$','$n_a = 15$'};
 rowLabels = {'$n_b = 13$','$n_b = 14$','$n_b = 15$','$n_b = 16$'};
 
-matrix2latex(fit', './armaxnc10.tex', ...
+matrix2latex(aic_value', './armaxnc10.tex', ...
             'rowLabels', rowLabels, ...
             'columnLabels', columnLabels, ...
             'alignment', 'c', ...
@@ -116,7 +116,7 @@ matrix2latex(fit', './armaxnc10.tex', ...
  
 %% Balanced model reduction
 close all;
-na = 20; nb = 20; nc = 10;
+na = 20; nb = 20; nc = 20;
 
 [model, fit_1, aic_value ] = fun_armax_model(na, nb, nc,...
     preprocessed_prbs_est, preprocessed_prbs_val, false)
@@ -148,7 +148,13 @@ pzplot(sys); legend('reduced order system','original system');
 figure(4); clf;
 resid(preprocessed_prbs_val, rsys);
 
-[mag,phase,wout] = bode(rsys); 
+%%
+na = 12; nb = 15; nc = 10;
+
+[model, fit_1, aic_value ] = fun_armax_model(na, nb, nc,...
+    preprocessed_prbs_est, preprocessed_prbs_val, false)
+
+[mag,phase,wout] = bode(model); 
 mag = squeeze(mag);
 
 %% 

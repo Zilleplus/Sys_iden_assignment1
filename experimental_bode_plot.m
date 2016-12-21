@@ -34,12 +34,13 @@ end
 
 figure; clf;
 plot(wout,log10(mag)*20,'LineWidth',1.5); hold on;
+plot(wout1,log10(mag1)*20,'LineWidth',1.5); hold on;
 plot( 2*pi*freq/len_test, 20*log10(smooth(ampl)),'.-' ,'LineWidth',1.5 ...
     , 'MarkerSize',12); grid on;
 title('Experimental Bode estimate');
 xlabel('normalized frequency f/fs'); ylabel('Magnitude (dB)'); 
 xlim([2*pi*freq(1)/len_test, 2*pi*freq(end)/len_test]);
-legend('estimated model','real system')
+legend('ARMAX model','ARX model','real system')
 
 
 

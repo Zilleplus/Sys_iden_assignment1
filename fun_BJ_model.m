@@ -1,11 +1,12 @@
-function [model, order, fit, aic_value, mag, wout ] = fun_OE_model(nb,nf, ...
-    preprocessed_prbs_est, preprocessed_prbs_val, show_plot )
+function [model, order, fit, aic_value, mag, wout ] = fun_BJ_model(nb,nf, ...
+    nc, nd, preprocessed_prbs_est, preprocessed_prbs_val, show_plot )
+% y(t)=[ B(q)/F(q) ]*u(t-nk) + [ C(z)/D(z) ]e(t)
 
 nk = 0; % estimated delay
 order=Inf; % this is not used here??? TODO
 
 % Estimate an ARX model 
-model = oe(preprocessed_prbs_est, [nb nf nk]);
+model = bj(preprocessed_prbs_est,  [nb nc nd nf nk]);
 
 % Compare model output and measured output.
 [y_model,fit] = compare(preprocessed_prbs_val, model);

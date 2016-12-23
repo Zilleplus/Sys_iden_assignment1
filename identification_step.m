@@ -1,17 +1,4 @@
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-% Identification part ;
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-clear all; close all;
-load('simulation_data_3.mat')
-
-% Data
-delay = 15;
-preprocessed_prbs_est = preprocessing( iddata(y_prbs_est,...
-    u_prbs(1:N_est),1),[], delay, 20, 0); % estimation data set
-preprocessed_prbs_val = preprocessing( iddata(y_prbs_val,...
-    u_prbs(N_est+1:N),1),[], delay, 20, 0); % validation data set
-
-
+run('identification_init');
 %% ARX model
 close all;
 disp('Testing ARX model ...');
@@ -20,10 +7,11 @@ na = 3:3:24; nb = 3:3:24;
 fit = zeros(numel(na),numel(nb)); % preallocation
 aic_value = zeros(numel(na),numel(nb));
 
+showFigures=false;
 for i = 1:numel(na)
     for j = 1:numel(nb)
         [~, ~, fit(i,j), aic_value(i,j) ]= fun_arx_model( na(i),nb(j), ...
-            preprocessed_prbs_est, preprocessed_prbs_val,true );
+            preprocessed_prbs_est, preprocessed_prbs_val,showFigures );
     end
 end
 

@@ -5,31 +5,17 @@ run('identification_init');
 % where y(t) is the output, u(t) is the input and e(t) is the disturbance.
 % na = order of A polynomial     (Ny-by-Ny matrix)
 % order of B polynomial + 1 (Ny-by-Nu matrix)
+%% Identification using the na,nb from the generated table
+na = 12; nb = 15; nc = 10;
 
-disp('Testing ARMAX model ...');
-na = 8:1:15; nb = 13:1:16; nc = 10;
+[model, fit_1, aic_value ] = fun_armax_model(na, nb, nc,...
+    preprocessed_prbs_est, preprocessed_prbs_val, true)
 
-fit = zeros(numel(na),numel(nb),numel(nc));
-aic_value = zeros(numel(na),numel(nb),numel(nc));
-for i = 1:numel(na)
-    for j = 1:numel(nb)
-        for k = 1:numel(nc)
-            [~, fit(i,j,k) , aic_value(i,j,k) ] = fun_armax_model(na(i), nb(j), nc(k),...
-                preprocessed_prbs_est, preprocessed_prbs_val, false);
-        end
-    end
-end
+[mag1,phase1,wout1] = bode(model); 
+mag1 = squeeze(mag1);
 
-columnLabels = {'$n_a = 8$','$n_a = 9$','$n_a = 10$', '$n_a = 11$', ...
-    '$n_a = 12$','$n_a = 13$','$n_a = 14$','$n_a = 15$'};
-rowLabels = {'$n_b = 13$','$n_b = 14$','$n_b = 15$','$n_b = 16$'};
-
-matrix2latex(aic_value', './armaxnc10.tex', ...
-            'rowLabels', rowLabels, ...
-            'columnLabels', columnLabels, ...
-            'alignment', 'c', ...
-            'format', '%-6.2f');
- 
+figureNumber=5;nameModel='ARMAX';
+fun_bode_plot( wout1,mag1,nameModel,figureNumber )
 %% Balanced model reduction
 close all;
 na = 20; nb = 20; nc = 20;
@@ -64,11 +50,19 @@ pzplot(sys); legend('reduced order system','original system');
 figure(4); clf;
 resid(preprocessed_prbs_val, rsys);
 
-%%
-na = 12; nb = 15; nc = 10;
+% plot out the mag with real model
+[mag2,phase2,wout2] = bode(rsys); 
+mag2 = squeeze(mag2);
 
-[model, fit_1, aic_value ] = fun_armax_model(na, nb, nc,...
-    preprocessed_prbs_est, preprocessed_prbs_val, false)
+figureNumber=5;
+fun_bode_plot(wout2,mag2,'ARX model',figureNumber);
 
-[mag,phase,wout] = bode(model); 
-mag = squeeze(mag);
+%% compare the 2 methods
+
+nameModel1='ARMAX_{table}';
+nameModel2='ARMAX_{balred}';
+figureNumber=6;
+fun_bode_plot_dual( wout1,mag1,wout2,mag2,nameModel1, ...
+    nameModel2, figureNumber )
+
+

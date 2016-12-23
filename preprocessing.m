@@ -62,23 +62,23 @@ if show_plot == 1
     legend('Raw y','Preprocessed y');
     ylim([-sigma,sigma]);
 elseif show_plot == 2
-    figure(1); clf; plot(y_step1,'LineWidth',2);
+    figure(1); clf; plot(y_step1);
     set(gca, 'fontsize', 11); grid on;
     xlabel('Time'); title('Output y - without DC offset', 'FontWeight','bold');
     ylim([-sigma,sigma]);
     
-    figure(2); clf; plot(y_step2,'LineWidth',2);
+    figure(2); clf; plot(y_step2);
     set(gca, 'fontsize', 11); grid on;
     xlabel('Time'); title('Peak shaving', 'FontWeight','bold');
     ylim([-sigma,sigma]);
  
-    figure(3); clf; plot(y_step3,'LineWidth',2);
+    figure(3); clf; plot(y_step3);
     set(gca, 'fontsize', 11); grid on;
     xlabel('Time'); title('Detrended y', 'FontWeight','bold');
     ylim([-sigma,sigma]);
     
-    figure(4); clf; plot(y_step1(delay:end),'LineWidth',2); hold on;
-    plot(preprocessed_y,'r','LineWidth',2);
+    figure(4); clf; plot(y_step1(delay:end)); hold on;
+    plot(preprocessed_y,'r');
     set(gca, 'fontsize', 11); grid on;
     xlabel('Time'); title('Delay removed - Preprocessed output', ...
         'FontWeight','bold');

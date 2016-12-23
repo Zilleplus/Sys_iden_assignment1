@@ -3,11 +3,11 @@ run('identification_init');
 close all;
 na = 20; nb = 20;
 
-[model, order, fit, aic_value, mag, wout ]= fun_arx_model(na,nb, ...
+[model, order, fit, aic_value, mag1, wout1 ]= fun_arx_model(na,nb, ...
     preprocessed_prbs_est, preprocessed_prbs_val,true );
 
 figureNumber=5;
-fun_bode_plot(wout,mag,'ARX model',figureNumber);
+fun_bode_plot(wout1,mag1,'ARX model',figureNumber);
 %%
 sys = ss(model);  
 [Ab,Bb,Cb,M,T] = dbalreal(sys.a,sys.b,sys.c); 
@@ -33,5 +33,14 @@ figure(3);
 pzplot(rsys); hold on;
 pzplot(sys); legend('reduced order system','original system');
 
-[mag1,phase,wout1] = bode(rsys); 
-mag1 = squeeze(mag1);
+[mag2,phase2,wout2] = bode(rsys); 
+mag2 = squeeze(mag2);
+
+figureNumber=5;
+fun_bode_plot(wout2,mag2,'ARX model',figureNumber);
+
+%%
+nameModel1='ARX_{table}';
+nameModel2='ARX_{balred}';
+fun_bode_plot_dual( wout1,mag1,wout2,mag2,nameModel1, ...
+    nameModel2, figureNumber )

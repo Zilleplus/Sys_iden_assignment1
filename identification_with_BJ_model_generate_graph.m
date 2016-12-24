@@ -1,5 +1,6 @@
-        %% Generate table with different fit values
-max_range=9;
+run('identification_init');
+%% Generate table with different fit values
+max_range=15;
 nb = 1:2:max_range;%21
 nf = 1:2:max_range;%17
 nc = 1:2:max_range;%12
@@ -44,3 +45,30 @@ title('fit');
 subplot(1,2,2);
 plot(nb,r_aic_value);
 title('AIC');
+%% Find the max value
+%
+range=7;
+
+max_val=zeros(range,1);
+max_pos=zeros(range,1);
+for i=1:range
+   [ max_val(i) , max_pos(i) ] = max(max(max(fit(i,:,:,:))));
+end
+[val,pos] = max(max_val);
+nb=pos;
+
+for i=1:range
+   [ max_val(i) , max_pos(i) ] = max(max(max(fit(x,i,:,:)))) ;
+end
+[val,pos] = max(max_val);
+nf=pos;
+
+for i=1:range
+   [ max_val(i) , max_pos(i) ] = max(max(max(fit(x,y,i,:)))) ;
+end
+[val,pos] = max(max_val);
+nc=pos;
+
+[~,nd] = max(fit(nb,nf,nc,:));
+
+disp(['nb=' num2str(nb) ' nf='  num2str(nf) ' nc=' num2str(nc) ' nd=' num2str(nd) ' fit=' num2str(fit(nb,nf,nc,nd))]);

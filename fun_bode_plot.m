@@ -4,7 +4,7 @@ function  fun_bode_plot( wout,mag,nameModel,figureNumber )
     delay = 15;
     
     for k = 1:numel(freq)
-        preprocessed_data = preprocessing(iddata( y_mut_sine(:,k), ...
+        preprocessed_data = fun_preprocessing(iddata( y_mut_sine(:,k), ...
             u_mut_sine(:,k), 1 ),[], delay, 20, 0 );
 
         z(:,k) = fft(preprocessed_data.y)/len_test;
@@ -21,4 +21,3 @@ function  fun_bode_plot( wout,mag,nameModel,figureNumber )
     legend(nameModel,'real system')
 
 end
-

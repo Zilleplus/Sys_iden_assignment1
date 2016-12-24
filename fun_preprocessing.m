@@ -1,4 +1,4 @@
-function preprocessed_data = preprocessing( data, level, delay, sigma, show_plot )
+function preprocessed_data = fun_preprocessing( data, level, delay, sigma, show_plot )
 % PREPROCESSING This MATLAB function returns the signal y which is
 % preprocessed by means of the following steps:
 %           - Removing DC offset ;

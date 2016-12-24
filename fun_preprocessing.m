@@ -35,7 +35,7 @@ end
 % y_step3 = y_step2 - yTrend;
 
 [b, a] = butter(4, 0.01, 'high');
-y_step3 = filtfilt(b,a,y_step2);
+y_step3 = filter(b,a,y_step2);
 
 % STEP 4 : Remove the delay
 preprocessed_y = y_step3(delay:end);

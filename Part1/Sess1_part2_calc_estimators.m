@@ -1,12 +1,13 @@
 function [ LS , EIV, IV ] = Sess1_part2_calc_estimators( set,stdev_ni,stdev_nu )
-% dim1= #measurements
-% dim2= #experiments
-% dim3= [i u] ! vector !
+% Computes the LS, EIV  and IV estimates for data included in 'set'. The 
+% shift s for the IV estimate is specified set to 1. The standard deviation
+% of the noise on the input and on the output (n_i and n_u) are specified
+% as an argument.
 
 size_set = size(set);
 amount_of_experiments = size_set(2);
 
-% Allocation
+% Preallocation
 EIV = zeros(amount_of_experiments,1);
 LS = zeros(amount_of_experiments,1);
 

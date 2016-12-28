@@ -30,10 +30,6 @@ else
 end
 
 % STEP 3 : Remove the trend
-% [bf,af] = butter(4, 0.05); % low pass Butterworth filter
-% yTrend = filtfilt(bf, af, y_step2);
-% y_step3 = y_step2 - yTrend;
-
 [b, a] = butter(4, 0.01, 'high');
 y_step3 = filter(b,a,y_step2);
 
@@ -52,7 +48,7 @@ if show_plot == 1
     ylim([-sigma,sigma]);
  
     subplot(2,2,3); plot(y_step3,'LineWidth',2); grid on;
-    xlabel('Time'); title('Detrended y');
+    xlabel('Time'); title('High-pass filtered y');
     ylim([-sigma,sigma]);
     
     subplot(2,2,4); plot(y_step1(delay:end),'LineWidth',2); hold on;
@@ -74,7 +70,7 @@ elseif show_plot == 2
  
     figure(3); clf; plot(y_step3);
     set(gca, 'fontsize', 11); grid on;
-    xlabel('Time'); title('Detrended y', 'FontWeight','bold');
+    xlabel('Time'); title('High-pass filtered y', 'FontWeight','bold');
     ylim([-sigma,sigma]);
     
     figure(4); clf; plot(y_step1(delay:end)); hold on;
@@ -89,9 +85,5 @@ end
 input = data.u;
 preprocessed_data = iddata(preprocessed_y, input(delay:end), 1);
 
-
-%     figure(2); clf;
-%     plot(abs(fft(y_step1))); hold on;
-%     plot(abs(fft(preprocessed_y)),'r');
 end
 

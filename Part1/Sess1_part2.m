@@ -1,6 +1,8 @@
+%--------------------------------------------------------------------------
+% Marie Valenduc and Willem Melis (November 2016) 
+% System identification and modeling - Session 1
+%--------------------------------------------------------------------------
 clear all; close all;
-
-tic
 
 % experiment settings
 N = 5000; % #measurements
@@ -12,14 +14,11 @@ stdev_ni = 0.001;
 stdev_nu = 1;
 R0 = 1000; 
 
-%%
+%% Experiment
 [ set ] = Sess1_part2_generate_data( N, amount_of_experiments, ...
     R0, stdev_nu, stdev_ni, stdev_i0 );
-%%
-[ LS , EIV IV ] = Sess1_part2_calc_estimators( set,stdev_ni,stdev_nu );
-
-%%
-
+[ LS , EIV, IV ] = Sess1_part2_calc_estimators( set,stdev_ni,stdev_nu );
+%% Figures
 fig=figure(1);clf;
 pd_ls = fitdist(LS,'Normal');
 pd_eiv = fitdist(EIV,'Normal');

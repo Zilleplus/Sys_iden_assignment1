@@ -1,6 +1,9 @@
+%--------------------------------------------------------------------------
+% Marie Valenduc and Willem Melis (November 2016) 
+% System identification and modeling - Session 1
+%--------------------------------------------------------------------------
 clear all; close all;
 
-tic
 N = 5000; % #measurements
 amount_of_experiments = 1000; % #experiments
 
@@ -64,20 +67,17 @@ ylim([0,0.1]); ylabel('PDF(R)');
 subplot(3,3,4);
 plot(0:10, correlation_ni_set1(12:end-1),'b-x'); hold all;
 plot(0:10, correlation_i0_set1(12:end-1),'r-o'); hold all;
-% set(gca, 'fontsize', 17);
 xlabel('Lag'); ylabel('Auto-correlation')
 legend('R_{ni,ni}','R_{i0,i0}');
 title('(b.1)')
 subplot(3,3,5);
 plot(0:10, correlation_ni_set2(12:end-1),'b-x'); hold all;
 plot(0:10, correlation_i0_set2(12:end-1),'r-o'); hold all;
-% set(gca, 'fontsize', 17);
 xlabel('Lag'); ylabel('Auto-correlation')
 title('(b.2)')
 subplot(3,3,6);
 plot(0:10, correlation_ni_set3(12:end-1),'b-x'); hold all;
 plot(0:10, correlation_i0_set3(12:end-1),'r-o'); hold all;
-% set(gca, 'fontsize', 17);
 xlabel('Lag'); ylabel('Auto-correlation')
 title('(b.3)')
 
@@ -94,7 +94,6 @@ for k=1:3
     subplot(3,3,6+k)
     plot(w/(2*pi),10*log(abs(h)),'r', 'LineWidth',2); hold on;
     plot(w1/(2*pi),10*log(abs(h1)),'b', 'LineWidth',2);
-    % set(gca, 'fontsize', 17);
     xlim([0,0.5]); xlabel('f/fs'); % fs = sampling frequency
     ylim([-30,10]); ylabel('Filter [dB]');
     legend('n_i filter', 'i_0 filter')
@@ -111,9 +110,9 @@ frame_h = get(handle(gcf),'JavaFrame');
 set(frame_h,'Maximized',1); 
 
 subplot(2,1,1);
-pd1 = fitdist(IV_set3,'Normal')
-pd2 = fitdist(IV_s2,'Normal')
-pd3 = fitdist(IV_s5,'Normal')
+pd1 = fitdist(IV_set3,'Normal');
+pd2 = fitdist(IV_s2,'Normal');
+pd3 = fitdist(IV_s5,'Normal');
 pd4 = fitdist(LS_set3,'Normal');
 
 x_values = 0:1:1500;
@@ -125,7 +124,6 @@ plot(x_values,y1, ...
     x_values,y2, ...
     x_values,y3, ...
     x_values,y4, 'LineWidth',2)
-% set(gca, 'fontsize', 17);
 legend('IV (s = 1)','IV (s = 2)','IV (s = 5)','LS');
 ylim([0,0.05]); ylabel('PDF(R)');
 title('(a)')
@@ -152,7 +150,6 @@ num = 20; % number of points at which we calculate the frequency response
 subplot(2,2,4);
 plot(w/(2*pi),10*log(abs(h)),'r', 'LineWidth',2); hold on;
 plot(w1/(2*pi),10*log(abs(h1)),'b', 'LineWidth',2);
-%set(gca, 'fontsize', 17);
 xlim([0,0.5]); xlabel('f/fs'); % fs = sampling frequency
 ylim([-30,10]); ylabel('Filter [dB]');
 legend('n_i filter', 'i_0 filter')
@@ -160,5 +157,3 @@ title('(c)')
 
 name = './figures/Sess1_part1_exp2';
 saveas(fig,name,'epsc');
-
-toc

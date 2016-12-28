@@ -1,13 +1,11 @@
 function [ LS , IV ] = Sess1_part1_calc_estimators( set,s )
-% Estimators for 3 sets ---------
-% LS = zeros(amount_of_experiments,1);
-
-% s = 1;
+% Computes the LS and IV estimates for data included in 'set'. The shift s
+% for the IV estimate is specified as an argument.
 
 size_set = size(set);
 amount_of_experiments = size_set(2);
 
-% Allocation
+% Pre-allocation
 IV = zeros(amount_of_experiments,1);
 LS = zeros(amount_of_experiments,1);
 

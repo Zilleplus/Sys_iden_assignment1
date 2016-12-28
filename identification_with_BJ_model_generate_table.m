@@ -24,7 +24,7 @@ for index_nb = 1:numel(nb)
               preprocessed_prbs_val, show_plot );
     end
 end
-%%
+
 rowLabels = {'nb=1', 'nb=3' , 'nb=5' , 'nb=7' , 'nb=9'};
 columnLabels = {'nf=1', 'nf=3' , 'nf=5', 'nf=7' , 'nf=9'};
 

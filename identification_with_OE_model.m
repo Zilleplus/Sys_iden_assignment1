@@ -12,8 +12,8 @@ run('identification_init');
 %     Ny is the number of outputs and Nu is the number of inputs.
 %     The delay appears as leading zeros of the B polynomial.
 %% OPTIMAL FIT VALUE with table
-nb=3;
-nf=7;
+nb=11;%3
+nf=11;%7
 show_plot=true;
 [model, order, fit, aic_value, mag ] = fun_OE_model(nb,nf, ...
     preprocessed_prbs_est, preprocessed_prbs_val, show_plot )
@@ -49,6 +49,8 @@ rsys = ss(Ab,Bb,Cb,sys.D,1);
 
 [ry,fit] = compare(preprocessed_prbs_val, idpoly(rsys))
 
+aic_value = aic(idpoly(model))
+
 figure(2); clf; grid on;
 plot(ry.y); hold on;
 plot(preprocessed_prbs_val.y);
@@ -65,6 +67,10 @@ mag2 = squeeze(mag2);
 
 figureNumber=5;
 fun_bode_plot(wout2,mag2,'ARX model',figureNumber);
+
+% Compute and test the residuals
+figure(6); clf;
+resid(preprocessed_prbs_val, model);
 
 %%
 nameModel1='OE_{table}';

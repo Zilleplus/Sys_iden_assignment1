@@ -1,8 +1,8 @@
 run('identification_init');
 %% Generate table with different fit values
 
-nb = 1:2:9;
-nf = 1:2:9;
+nb = 1:2:13;
+nf = 1:2:13;
 nk=0; % delay allready removed from the data
 
 show_plot=false;
@@ -21,9 +21,9 @@ for index_nb = 1:numel(nb)
               preprocessed_prbs_val, show_plot );
     end
 end
-
-rowLabels = {'nb=1', 'nb=3' , 'nb=5' , 'nb=7' , 'nb=9'};
-columnLabels = {'nf=1', 'nf=3' , 'nf=5', 'nf=7' , 'nf=9'};
+%%
+rowLabels = {'$n_b=1$', '$n_b=3$' , '$n_b=5$' , '$n_b=7$' , '$n_b=9$' , '$n_b=11$', '$n_b=13$'};
+columnLabels = {'$n_f=1$', '$n_f=3$' , '$n_f=5$', '$n_f=7$' , '$n_f=9$' , '$n_f=11$', '$n_f=13$'};
 
 matrix2latex(fit, './tables/fit_OE_table.tex', ...
             'rowLabels', rowLabels, ...

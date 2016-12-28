@@ -2,7 +2,7 @@ function [model, order, fit, aic_value, mag, wout ] = fun_OE_model(nb,nf, ...
     preprocessed_prbs_est, preprocessed_prbs_val, show_plot )
 
 nk = 0; % estimated delay
-order=Inf; % this is not used here??? TODO
+order=Inf;% unused at the moment
 
 % Estimate an ARX model 
 model = oe(preprocessed_prbs_est, [nb nf nk]);

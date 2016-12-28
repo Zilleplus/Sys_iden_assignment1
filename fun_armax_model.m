@@ -29,9 +29,6 @@ if show_plot
     % Pole-zero map of system model
     figure(3); clf;
     pzplot(model);
-    
-    figure(4); clf;
-    bode(model);
 end
 
 end

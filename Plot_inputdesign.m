@@ -2,10 +2,6 @@ close all; clear all;
 load('simulation_data_3.mat');
 
 DC = mean(y_zero);
-% Sampling frequency = 10
-t_500 = 0:0.1:49.9;
-t_1000 = 0:0.1:99.9;
-t_2000 = 0:0.1:199.9;
 
 %% Applying a zero-sequence to the system - time domain
 figure(1); clf;

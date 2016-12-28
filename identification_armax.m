@@ -5,7 +5,8 @@ run('identification_init');
 % where y(t) is the output, u(t) is the input and e(t) is the disturbance.
 % na = order of A polynomial     (Ny-by-Ny matrix)
 % order of B polynomial + 1 (Ny-by-Nu matrix)
-%% Identification using the na,nb from the generated table
+
+% Identification using the na,nb from the generated table
 na = 12; nb = 15; nc = 10;
 
 [model, fit_1, aic_value ] = fun_armax_model(na, nb, nc,...

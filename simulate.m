@@ -5,9 +5,7 @@ function y = simulate(input,nsim)
 % Intput :  * input : vector, input signal ;
 %           * nsim  : scalar, the number of simulations that is performed ;
 % Output :  * y     : vector, average output signal ;
-%
-% System identification and modelling
-% December 2016
+
 m = numel(input);  % length of the input signal
 y = zeros(m,1);    % preallocation
 for k = 1:nsim

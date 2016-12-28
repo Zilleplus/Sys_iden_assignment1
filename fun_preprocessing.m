@@ -3,7 +3,7 @@ function preprocessed_data = fun_preprocessing( data, level, delay, sigma, show_
 % preprocessed by means of the following steps:
 %           - Removing DC offset ;
 %           - Removing the peaks ;
-%           - Removing the trend ;
+%           - High-pass filtering ;
 %           - Removing the delay ;
 % Input :   * data: iddata object ;
 %           * level: 2 elements vector, for the function pkshave ;
@@ -11,11 +11,11 @@ function preprocessed_data = fun_preprocessing( data, level, delay, sigma, show_
 %           * sigma: used for the plot ;
 %           * show_plot: = 1, to display the steps of preprocessing ;
 %                        = 0, otherwise ;
-%                        = 2, other plot
+%                        = 2, other plots ;
 % Output :  * preprocessed_y: iddata object, treated data;
 %
 % System identification and modelling
-% December 2016
+
 y = data.y ;
 % STEP 1 : Remove DC offset
 DC = mean(y) ;
@@ -29,7 +29,7 @@ else
     y_step2 = pkshave(y_step1, [-level,level]);
 end
 
-% STEP 3 : Remove the trend
+% STEP 3 : High-pass filtering
 [b, a] = butter(4, 0.01, 'high');
 y_step3 = filter(b,a,y_step2);
 

@@ -15,14 +15,13 @@ V = arxstruc(preprocessed_prbs_est, preprocessed_prbs_val, ...
  
 selstruc(V)
 
-
 fit = zeros(numel(na),numel(nb)); % preallocation
 aic_value = zeros(numel(na),numel(nb));
 
 showFigures=false;
 for i = 1:numel(na)
     for j = 1:numel(nb)
-        [~, ~, fit(i,j), aic_value(i,j) ]= fun_arx_model( na(i),nb(j), ...
+        [~, fit(i,j), aic_value(i,j),~,~ ]= fun_arx_model( na(i),nb(j), ...
             preprocessed_prbs_est, preprocessed_prbs_val,showFigures );
     end
 end

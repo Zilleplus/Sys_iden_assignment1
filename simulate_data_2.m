@@ -45,8 +45,4 @@ u_prbs= idinput(len,'prbs',[0,1],[-3,3]);
 y_prbs_est = simulate(u_prbs(1:N_est),nsim);
 y_prbs_val = simulate(u_prbs(N_est+1:N),nsim);
 
-
-disp('simulating sine wave at several frequencies')
-% TO DO 
-
 save('simulation_data_3.mat');

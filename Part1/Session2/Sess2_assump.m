@@ -55,7 +55,7 @@ for k = 1:2
     [~,indexmin] = min(V_LS_est);
     disp(['The optimal order is ',num2str(indexmin)]);
     
-    figure(2); subplot(1,2,k)
+    fig = figure(2); subplot(1,2,k)
     plot(V_LS_est./stdev_ny^2,'r','LineWidth',2); hold all;
     plot(V_LS_val./stdev_ny^2,'g','LineWidth',2); hold all;
     plot(V_AIC./stdev_ny^2,'LineWidth',2)
@@ -65,4 +65,5 @@ for k = 1:2
     legend('V_{est}','V_{val}','V_{AIC}');
 end
 
-
+name = './figures/Sess2_assump';
+saveas(fig,name,'epsc');

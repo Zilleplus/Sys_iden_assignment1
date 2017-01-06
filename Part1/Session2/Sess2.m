@@ -75,7 +75,7 @@ for k =1:2:3
     elseif(k==3) title('Noisy data; \sigma_{ny} = 0.05'); 
     end
     
-    figure(1); subplot(2,2,k+1)
+    fig=figure(1); subplot(2,2,k+1)
     plot(sqrt(V_0/stdev_ny^2),'LineWidth',2)
     set(gca, 'fontsize', 17);
     xlim([0,100]); ylim([0, 1]);
@@ -88,6 +88,8 @@ for k =1:2:3
     stdev_ny = 0.05;                        % for second experiment
 end
 
+name = './figures/Sess2';
+saveas(fig,name,'epsc');
 
 
 

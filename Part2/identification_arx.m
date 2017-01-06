@@ -1,6 +1,7 @@
 run('identification_init');
-%% optimal value selected from table
 close all;
+
+%% optimal value selected from table
 na = 15; nb = 24;
 
 [model, fit, aic_value, mag1, wout1 ]= fun_arx_model(na,nb, ...
@@ -9,7 +10,7 @@ na = 15; nb = 24;
 figureNumber=5;
 fun_bode_plot(wout1,mag1,'ARX model',figureNumber);
 %% Balanced model reduction
-close all;
+
 na = 20; nb = 20;
 
 [model, fit, aic_value, mag, wout ]= fun_arx_model(na,nb, ...

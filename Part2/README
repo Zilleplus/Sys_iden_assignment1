@@ -32,4 +32,23 @@ For every model x (where x is arx, armax, OE, BJ or subspace) we have the follow
 
 (*) fun_x_model.m : generates the model with the specified order and computes the criteria of section 3.1 (see report).
 
+(*) identification_x_generate_table.m : generates the tables with the fit and AIC values (uses matrix2latex.m).
+
+(*) identification_x.m : starts with the identification of the model with orders determined from the table. It then generates a graph with the Bode plot of the real system and the estimated model.
+
+For the Box-Jenkins model, an extra function that generates a graph (as explained in the report)is included (see identification_BJ_generate_graph.m).
+
+
+
+  Bode plot.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+(*) bodedata.mat : data for plotting the Bode graph.
+
+(*) fun_bode_plot_dual WILLEM kan je uitleggen wat het is :-)
+
+(*) fun_bode_plot WILLEM kan je uitleggen wat het is :-)
+
+
+
 

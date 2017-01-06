@@ -1,6 +1,6 @@
 run('identification_init');
 %% Generate table ARX model, this takes a while
-% The table is stored in ./tables/tex
+% The table is stored in ./tables/
 close all;
 disp('Testing ARX model ...');
 na = 3:3:24; nb = 15:3:24;

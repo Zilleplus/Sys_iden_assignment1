@@ -1,1 +1,40 @@
-The generated figures are saved in this folder
+Valenduc Marie, Melis Willem
+January 2017
+
+
+SYSTEM IDENTIFICATION AND MODELING - PART 1
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  First part of the assignment : Noise on Input and Output.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+The following files are used for sections 1.1 and 1.2 of the report:
+
+- Sess1_part1_generate_data.m: necessary to generate all the data for the following ex-periments.
+
+- Sess1_part1_calc_estimators.m: computes the IV and LS estimators.
+
+- Sess1_part1.m: recreates the experiments and generates the plots.
+
+
+The following files are used for section 1.3 of the report: 
+
+- Sess1_part2_generate_data.m: necessary to generate all the data for the following ex-periments.
+
+- Sess1_part2_calc_estimators.m: computes the LS, IV and EIV estimators.
+
+- Sess1_part2.m: recreates the experiments and generates the plots.
+
+The generated figures are saved in the folder Session1/figures/
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  Second part of the assignment : Model selection using AIC.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+The following files are used:
+
+- Sess2.m: recreates the experiments and generates the plots.
+
+- Sess2_assump.m: compares the results with and without the assumption that the system isinitially at rest.
+
+The generated figures are saved in the folder Session2/figures/

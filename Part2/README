@@ -1,0 +1,26 @@
+Valenduc Marie, Melis Willem
+January 2017
+
+
+SYSTEM IDENTIFICATION AND MODELING - PART 2
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  Initialisation.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+To indicate the path, run Sess3_init.m
+
+All the identification scripts start with running identification_init.m, this script loads the matrices with test data.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  Input design.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  Preprocessing.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  Identification and validation.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+

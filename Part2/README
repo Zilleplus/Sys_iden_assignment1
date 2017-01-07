@@ -45,11 +45,11 @@ For the Box-Jenkins model, an extra function that generates a graph (as explaine
 
 (*) bodedata.mat : data for plotting the Bode graph.
 
-(*) generate_data_bode_plot.m: generate the bodedata.mat file
+(*) generate_data_bode_plot.m:  generate the bodedata.mat file.
 
-(*) fun_bode_plot_dual: plots the experimental bode plot with the bode plot of model 
+(*) fun_bode_plot_dual.m : plots the experimental bode plot with the bode plot of model. 
 
-(*) fun_bode_plot plots the experimental bode plot with the bode plots of 2 models
+(*) fun_bode_plot plots.m : the experimental bode plot with the bode plots of 2 models.
 
 
 
